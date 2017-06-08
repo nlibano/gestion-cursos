@@ -9,11 +9,11 @@
 		<intercept-url pattern="/admin*" access="ROLE_USER" />
 		<intercept-url pattern="/admin/*" access="ROLE_USER" />
 		
-		<form-login login-page="/formularioLogin.jsp"
+		<form-login login-page="/login.jsp"
 					 username-parameter="usuario"
 					 login-processing-url="/login"
 					 password-parameter="clave"
-					 authentication-failure-url="/error.jsp"/>
+					 authentication-failure-url="/login-error.jsp"/>
  
 	</http>
 	<authentication-manager alias="authenticationManager">
