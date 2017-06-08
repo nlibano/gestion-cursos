@@ -1,4 +1,4 @@
-package com.ipartek.formacion;
+package com.ipartek.formacion.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
