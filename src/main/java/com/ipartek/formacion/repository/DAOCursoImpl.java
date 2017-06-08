@@ -42,23 +42,32 @@ public class DAOCursoImpl implements DAOCurso {
 	}
 
 	// Sentencias SQL
-	private static final String SQL_GET_ALL = "SELECT `id`, `NomCurso`, `CodCurso` FROM `curso` ORDER BY `id` DESC LIMIT 1000;";
-	private static final String SQL_GET_LAST_TEN = "SELECT `id`, `NomCurso`, `CodCurso` FROM `curso` ORDER BY `id` DESC LIMIT 10;";
-	private static final String SQL_GET_BY_ID = "SELECT `id`, `NomCurso`, `CodCurso` FROM `curso` WHERE `id` = ?;";
-	private static final String SQL_INSERT = "INSERT INTO `curso` (`NomCurso`, `CodCurso`) VALUES (?, ?);";
-	private static final String SQL_UPDATE = "UPDATE `curso` SET `NomCurso`= ? , `CodCurso`= ? WHERE `id`= ? ;";
+	private static final String SQL_GET_ALL = "SELECT `id`, `nombre`, `codigo` FROM `curso` ORDER BY `id` DESC LIMIT 1000;";
+	private static final String SQL_GET_ALL_FILTER = "SELECT `id`, `nombre`, `codigo` FROM `curso` WHERE `nombre` LIKE '%' ? '%' ORDER BY `nombre` ASC;";
+	private static final String SQL_GET_LAST_TEN = "SELECT `id`, `nombre`, `codigo` FROM `curso` ORDER BY `id` DESC LIMIT 10;";
+	private static final String SQL_GET_BY_ID = "SELECT `id`, `nombre`, `codigo` FROM `curso` WHERE `id` = ?;";
+	private static final String SQL_INSERT = "INSERT INTO `curso` (`nombre`, `codigo`) VALUES (?, ?);";
+	private static final String SQL_UPDATE = "UPDATE `curso` SET `nombre`= ? , `codigo`= ? WHERE `id`= ? ;";
 	private static final String SQL_DELETE = "DELETE FROM `curso` WHERE `id` = ?;";
 
 	@Override()
-	public List<Curso> getALL() {
-
-		this.LOG.trace("Listar todos los cursos");
+	public List<Curso> getALL(String filtro) {
 
 		ArrayList<Curso> lista = new ArrayList<Curso>();
 
 		try {
 
-			lista = (ArrayList<Curso>) this.jdbcTemplate.query(SQL_GET_ALL, new CursoMapper());
+			if (filtro == null) {
+
+				this.LOG.trace("Listar todos los cursos");
+				lista = (ArrayList<Curso>) this.jdbcTemplate.query(SQL_GET_ALL, new CursoMapper());
+
+			} else {
+
+				this.LOG.trace("Filtrar todos los cursos que contengan la palabra: " + filtro);
+				lista = (ArrayList<Curso>) this.jdbcTemplate.query(SQL_GET_ALL_FILTER, new CursoMapper());
+
+			}
 
 		} catch (EmptyResultDataAccessException e) {
 

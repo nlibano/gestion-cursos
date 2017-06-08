@@ -7,11 +7,17 @@ import com.ipartek.formacion.domain.Curso;
 public interface ServiceCurso {
 
 	/**
-	 * Lista todos los cursos limitado a 1000
+	 * Lista todos los cursos limitado a 1000 o los cursos correspondientes al
+	 * filtro.
 	 * 
+	 * @param filter
+	 *            Si es null, listaremos todos los cursos limitado a los 1000.
+	 *            <br>
+	 *            Si no es null, listaremos los cursos que contengan el nombre
+	 *            que se indica en el parametro filter
 	 * @return List<Curso>
 	 */
-	List<Curso> listar();
+	List<Curso> listar(String filter);
 
 	/**
 	 * Lista los ultimos 10 cursos

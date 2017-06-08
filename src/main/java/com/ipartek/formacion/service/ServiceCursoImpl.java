@@ -19,9 +19,9 @@ public class ServiceCursoImpl implements ServiceCurso {
 	private DAOCurso daoCurso;
 
 	@Override()
-	public List<Curso> listar() {
+	public List<Curso> listar(String filtro) {
 		LOG.trace("listar cursos");
-		return daoCurso.getALL();
+		return daoCurso.getALL(filtro);
 	}
 
 	@Override()

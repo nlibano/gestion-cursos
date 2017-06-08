@@ -15,7 +15,7 @@ public interface DAOCurso {
 	 * 
 	 * @return List<Curso>
 	 */
-	List<Curso> getALL();
+	List<Curso> getALL(String filtro);
 
 	/**
 	 * Lista los 10 ultimos cursos

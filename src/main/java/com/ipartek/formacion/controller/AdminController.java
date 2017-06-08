@@ -36,7 +36,7 @@ public class AdminController {
 
 		LOG.info("recuperando todos los cursos");
 
-		model.addAttribute("cursos", this.serviceCurso.listar());
+		model.addAttribute("cursos", this.serviceCurso.listar(null));
 
 		return VIEW_ADMIN_INDEX;
 	}
