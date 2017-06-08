@@ -26,9 +26,11 @@ public class AdminController {
 	private ServiceCurso serviceCurso;
 
 	/**
-	 *
+	 * Listamos los ultimos 1000 cursos.
+	 * 
 	 * @param model
-	 *            modelo que se usa para el paso de atributos a la vista
+	 *            modelo que se usa para el paso de atributos a la vista:
+	 *            "cursos" ArrayList<Curso>
 	 * @return la vista "admin/index"
 	 */
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
