@@ -11,7 +11,7 @@
 <html lang="es">
 <head>
 	<meta charset="utf-8">
-	<title>Inicio</title>
+	<title>Cursos</title>
 	<base href="/formacion/" />
 	
 	<link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -34,6 +34,6 @@
 	
 	 <div class="container">
 
-      <%@ include file="nav.jsp"%>
+      <%@ include file="nav-user.jsp"%>
         
   

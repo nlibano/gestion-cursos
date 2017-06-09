@@ -1,14 +1,32 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-<html>
-<head>
-	<title>Home</title>
-</head>
-<body>
-<h1>
-	Hello world!  
-</h1>
+<%@ include file="includes/header-user.jsp"%>
 
-<P>  The time on the server is ${serverTime}. </P>
-</body>
-</html>
+	<h1>
+		Ultimos Cursos Creados
+	</h1>
+
+	<table>
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Nombre</th>
+				<th>Codigo</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<c:forEach items="${cursos}" var="c" varStatus="index">
+				<tr>
+					<td>${index.count}</td>
+					<td>${c.nombre}</td>
+					<td>${c.codigo}</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+</table>
+
+<%@ include file="includes/scripts.jsp"%>
+
+<script src="resources/js/buscar-curso.js"></script>
+
+<%@ include file="includes/footer.jsp"%>
+

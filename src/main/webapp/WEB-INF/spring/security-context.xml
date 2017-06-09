@@ -14,7 +14,9 @@
 					 login-processing-url="/login"
 					 password-parameter="clave"
 					 authentication-failure-url="/login-error.jsp"/>
- 
+ 		<logout logout-success-url="/"
+			  	logout-url="/logout"
+			 	delete-cookies="JSESSIONID" />
 	</http>
 	<authentication-manager alias="authenticationManager">
 		<authentication-provider>

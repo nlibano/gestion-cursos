@@ -1,6 +1,12 @@
 /* Login
 **************************************/
 
+.login_bg{
+	background-image: url("../img/login-bg.jpg");
+	background-size: cover;
+    background-repeat: no-repeat;
+}
+
 #login h1.box-header {
 	background-color: #665851;
 	margin-top: 0;
@@ -22,7 +28,7 @@
 	max-width: 340px;
 	margin: 0 auto;
 	position: relative;
-	top: 80px;
+	top: 240px;
 	padding-bottom: 30px;
 	border-radius: 5px;
 	box-shadow: 0 5px 50px rgba(0,0,0,0.4);
@@ -79,4 +85,11 @@
 #login input[type="submit"]:hover {
 	opacity: 0.7;
 	transition: 0.5s;
+}
+
+/* Formularios Altas, Bajas y Modificaciones
+**************************************************************/
+
+.form-error{
+	color: red;
 }

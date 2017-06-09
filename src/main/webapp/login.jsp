@@ -8,7 +8,7 @@
 	<link href="resources/css/custom.css" rel="stylesheet">
 	
 </head>
-<body>
+<body class="login_bg">
 
 	<div id="login">
 		
@@ -17,12 +17,12 @@
 			<h1 class="box-header">Login</h1>
 			
 			<label for="usuario">Usuario</label>
-			<input type="text" name="usuario">
+			<input type="text" id="usuario" name="usuario">
 			
 			<label for="clave">Password</label>
-			<input type="password" name="clave">
+			<input type="password" id="clave" name="clave">
 			
-			<label for="clave"></label>
+			<br>
 			<input type="submit" value="validar">
 
 		</form>

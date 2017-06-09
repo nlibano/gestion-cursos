@@ -34,14 +34,8 @@
 			<!-- menu derecha -->  
             <ul class="nav navbar-nav navbar-right">
               <li class="active">
-              	 <a href="${requestScope['javax.servlet.forward.request_uri']}?locale=es">ES</a>
+              	 <a href="logout">Logout</a>
               	</li>
-              <li>
-              	<a href="${requestScope['javax.servlet.forward.request_uri']}?locale=eu">EU</a>
-              </li>
-              <li>
-              	<a href="${requestScope['javax.servlet.forward.request_uri']}?locale=en">EN</a>
-              </li>
             </ul>
             
                         

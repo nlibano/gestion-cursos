@@ -22,12 +22,12 @@ import com.ipartek.formacion.service.ServiceCurso;
  *
  */
 @Controller()
-@RequestMapping(value = "/curso")
+@RequestMapping(value = "/admin/curso")
 public class CursoController {
 
 	private static final Logger LOG = LoggerFactory.getLogger(CursoController.class);
 	private static final String VIEW_ADMIN_INDEX = "admin/index";
-	private static final String VIEW_ADMIN_FORM = "admin/form";
+	private static final String VIEW_ADMIN_FORM = "admin/form-curso";
 
 	@Autowired()
 	private ServiceCurso serviceCurso;
@@ -50,7 +50,15 @@ public class CursoController {
 		return VIEW_ADMIN_INDEX;
 	}
 
-	@RequestMapping(value = "/edit{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public String irFormularioNuevo(Model model) {
+
+		model.addAttribute("curso", new Curso());
+
+		return VIEW_ADMIN_FORM;
+	}
+
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String formularioEditar(@PathVariable int id, Model model) {
 
 		LOG.info("recuperando los datos de un curso");

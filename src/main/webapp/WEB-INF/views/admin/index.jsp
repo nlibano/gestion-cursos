@@ -1,8 +1,10 @@
-<%@ include file="../includes/header.jsp"%>
+<%@ include file="../includes/header-admin.jsp"%>
 
 <h1>
-	Bienvenido al index del administrador
+	Gestion de Cursos
 </h1>
+
+<a href="admin/curso/edit"><button class="btn btn-primary">Crear Nuevo Curso</button></a>
 
 <table class="table table-hover">
 	<tr>
@@ -17,7 +19,7 @@
 			<td>${index.count}</td>
 			<td>${c.nombre}</td>
 			<td>${c.codigo}</td>
-			<td>ver modificar borrar</td>
+			<td><a href="admin/curso/edit/${c.id}"><span class="glyphicon glyphicon-pencil"></span></a><a href="admin/curso/delete/${c.id}"><span class="glyphicon glyphicon-trash"></span></a></td>
 		</tr>
 	</c:forEach>
 
