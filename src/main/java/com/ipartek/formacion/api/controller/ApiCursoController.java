@@ -33,15 +33,15 @@ public class ApiCursoController {
 	private ServiceCurso serviceCurso;
 
 	/**
-	 * Listamos los cursos que contenga lo el filtro.
+	 * Listamos los cursos que contenga el parametro filter.
 	 * 
-	 * @param model
-	 *            modelo que se usa para el paso de atributos a la vista:
-	 *            "cursos" ArrayList<Curso>
-	 * @return la vista "admin/index"
+	 * @param filter
+	 *            nombre o codigo del curso a buscar en la BBDD.
+	 * @return Http Status + ArrayList<Curso>
+	 * 
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<ArrayList<Curso>> listar(
+	public @ResponseBody() ResponseEntity<ArrayList<Curso>> listar(
 			@RequestParam(value = "filter", required = false) String filter) {
 
 		LOG.info("recuperando los cursos que contengan: " + filter);
@@ -54,8 +54,7 @@ public class ApiCursoController {
 
 			if (!cursos.isEmpty()) {
 
-				response = new ResponseEntity<ArrayList<Curso>>((ArrayList<Curso>) this.serviceCurso.listar(filter),
-						HttpStatus.OK);
+				response = new ResponseEntity<ArrayList<Curso>>(cursos, HttpStatus.OK);
 
 			}
 

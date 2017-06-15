@@ -23,14 +23,22 @@ import org.springframework.stereotype.Repository;
 import com.ipartek.formacion.domain.Curso;
 import com.ipartek.formacion.repository.mapper.CursoMapper;
 
-@Repository("daoCurso")
+/**
+ * Repositorio Curso. Implementacion de la DAO.
+ * 
+ * @author Nagore Libano
+ *
+ */
+@Repository(value = "daoCurso")
 public class DAOCursoImpl implements DAOCurso {
 
 	private final Log LOG = LogFactory.getLog(getClass());
 	private static final String ERROR_INESPERADO = "Excepcion inesperada";
+	private static final String WARN_EMPTY_CURSOS = "No existen cursos todavia";
 
 	@Autowired()
 	private DataSource dataSource;
+	// private Connection conn;
 	private JdbcTemplate jdbcTemplate;
 
 	@Autowired()
@@ -39,11 +47,15 @@ public class DAOCursoImpl implements DAOCurso {
 		this.dataSource = ds;
 		this.jdbcTemplate = new JdbcTemplate(this.dataSource);
 
+		/*
+		 * try { this.conn = ds.getConnection(); } catch (SQLException e) { //
+		 * catch block e.printStackTrace(); }
+		 */
 	}
 
 	// Sentencias SQL
-	private static final String SQL_GET_ALL = "SELECT `id`, `nombre`, `codigo` FROM `curso` ORDER BY `id` DESC LIMIT 1000;";
-	private static final String SQL_GET_ALL_FILTER = "SELECT `id`, `nombre`, `codigo` FROM `curso` WHERE `nombre` LIKE '%' ? '%' ORDER BY `nombre` ASC;";
+	private static final String SQL_GET_ALL = "SELECT `id`, `nombre`, `codigo` FROM `curso` ORDER BY `id` DESC LIMIT 500;";
+	private static final String SQL_GET_ALL_FILTER = "SELECT `id`, `nombre`, `codigo` FROM `curso` WHERE (`nombre` LIKE '%' ? '%') OR (`codigo` LIKE '%' ? '%') ORDER BY `nombre` ASC;";
 	private static final String SQL_GET_LAST_TEN = "SELECT `id`, `nombre`, `codigo` FROM `curso` ORDER BY `id` DESC LIMIT 10;";
 	private static final String SQL_GET_BY_ID = "SELECT `id`, `nombre`, `codigo` FROM `curso` WHERE `id` = ?;";
 	private static final String SQL_INSERT = "INSERT INTO `curso` (`nombre`, `codigo`) VALUES (?, ?);";
@@ -65,13 +77,14 @@ public class DAOCursoImpl implements DAOCurso {
 			} else {
 
 				this.LOG.trace("Filtrar todos los cursos que contengan la palabra: " + filtro);
-				lista = (ArrayList<Curso>) this.jdbcTemplate.query(SQL_GET_ALL_FILTER, new CursoMapper());
+				lista = (ArrayList<Curso>) this.jdbcTemplate.query(SQL_GET_ALL_FILTER, new Object[] { filtro, filtro },
+						new CursoMapper());
 
 			}
 
 		} catch (EmptyResultDataAccessException e) {
 
-			this.LOG.warn("No existen cursos todavia", e);
+			this.LOG.warn(WARN_EMPTY_CURSOS, e);
 
 		} catch (Exception e) {
 
@@ -95,7 +108,7 @@ public class DAOCursoImpl implements DAOCurso {
 
 		} catch (EmptyResultDataAccessException e) {
 
-			this.LOG.warn("No existen cursos todavia", e);
+			this.LOG.warn(WARN_EMPTY_CURSOS, e);
 
 		} catch (Exception e) {
 
@@ -119,7 +132,7 @@ public class DAOCursoImpl implements DAOCurso {
 
 		} catch (EmptyResultDataAccessException e) {
 
-			this.LOG.warn("No existen cursos todavia", e);
+			this.LOG.warn(WARN_EMPTY_CURSOS, e);
 
 		} catch (Exception e) {
 
@@ -159,6 +172,89 @@ public class DAOCursoImpl implements DAOCurso {
 
 			this.LOG.error(ERROR_INESPERADO, e);
 
+		}
+
+		return resul;
+	}
+
+	@Override()
+	public boolean migrate(final ArrayList<Curso> cursos) {
+
+		this.LOG.trace("insertar nuevos cursos " + cursos);
+		boolean resul = false;
+		// String sql = "";
+		// int cont = 0;
+
+		try {
+
+			KeyHolder keyHolder;
+
+			// conn = DriverManager.getConnection(url, username, password);
+			// conn.setAutoCommit(false);
+
+			for (int i = 0; i < cursos.size(); i++) {
+
+				// sql = SQL_INSERT;
+				// sql = sql.replaceFirst("\\?", "\"" +
+				// cursos.get(i).getNombre() + "\"");
+				// sql = sql.replaceFirst("\\?", "\"" +
+				// cursos.get(i).getCodigo() + "\"");
+
+				// Object[] args = { cursos.get(i).getNombre(),
+				// cursos.get(i).getCodigo() };
+
+				keyHolder = new GeneratedKeyHolder();
+
+				final String nombre = cursos.get(i).getNombre();
+				final String codigo = cursos.get(i).getCodigo();
+
+				/*
+				 * PreparedStatementCreatorCustom psc = new
+				 * PreparedStatementCreatorCustom();
+				 * psc.createPreparedStatement(conn);
+				 * psc.setNombre(cursos.get(i).getNombre());
+				 * psc.setCodigo(cursos.get(i).getCodigo());
+				 * psc.setSql_Insert(SQL_INSERT);
+				 */
+
+				// int affectedeRows = this.jdbcTemplate.update(sql);
+
+				int affectedeRows = this.jdbcTemplate.update(new PreparedStatementCreator() {
+
+					@Override()
+					public PreparedStatement createPreparedStatement(Connection conn) throws SQLException {
+
+						PreparedStatement ps = conn.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
+						ps.setString(1, nombre);
+						ps.setString(2, codigo);
+
+						return ps;
+					}
+				}, keyHolder);
+
+				if (affectedeRows == 1) {
+					cursos.get(i).setId(keyHolder.getKey().longValue());
+					// } else {
+					// cont++;
+				}
+
+				// if (i == 2) {
+				// throw new Exception();
+				// }
+			}
+
+			// conn.commit();
+			resul = true;
+
+		} catch (Exception e) {
+
+			this.LOG.error(ERROR_INESPERADO, e);
+
+			/*
+			 * if (this.conn != null) { try { resul = false;
+			 * this.conn.rollback(); } catch (SQLException e1) {
+			 * this.LOG.error(ERROR_INESPERADO, e); } }
+			 */
 		}
 
 		return resul;
@@ -214,4 +310,11 @@ public class DAOCursoImpl implements DAOCurso {
 		return resul;
 	}
 
+	/*
+	 * public static void main(String[] args) {
+	 * 
+	 * System.out.println(SQL_INSERT.replaceFirst("\\?", "GALDERA ikurra"));
+	 * 
+	 * }
+	 */
 }

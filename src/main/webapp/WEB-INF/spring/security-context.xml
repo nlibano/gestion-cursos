@@ -6,8 +6,8 @@
 						http://www.springframework.org/schema/security
 						http://www.springframework.org/schema/security/spring-security.xsd">
 	<http auto-config="true">
-		<intercept-url pattern="/admin*" access="ROLE_USER" />
-		<intercept-url pattern="/admin/*" access="ROLE_USER" />
+		<intercept-url pattern="/admin**" access="ROLE_USER" />
+		<intercept-url pattern="/admin/**" access="ROLE_USER" />
 		
 		<form-login login-page="/login.jsp"
 					 username-parameter="usuario"

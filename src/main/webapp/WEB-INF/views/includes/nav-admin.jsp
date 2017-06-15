@@ -23,11 +23,11 @@
 
 			<form class="navbar-form navbar-left">
 				<div class="input-group">
-					<label for="buscar_curso" class="input-group-addon">
+					<label for="buscar_admin_curso" class="input-group-addon">
 						<span class="glyphicon glyphicon-search"></span>
 						&nbsp;Buscador
 					</label>
-					<input id="buscar_curso" name="buscar_curso" type="text" class="form-control" placeholder="Buscar curso">
+					<input id="buscar_admin_curso" name="buscar_admin_curso" type="text" class="form-control" placeholder="Buscar curso">
 				</div>
 			</form>
 

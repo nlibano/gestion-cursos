@@ -1,5 +1,6 @@
 package com.ipartek.formacion.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -10,7 +11,13 @@ import org.springframework.stereotype.Service;
 import com.ipartek.formacion.domain.Curso;
 import com.ipartek.formacion.repository.DAOCurso;
 
-@Service("serviceCurso")
+/**
+ * Implementacion del servicio Curso
+ * 
+ * @author Nagore Libano
+ *
+ */
+@Service(value = "serviceCurso")
 public class ServiceCursoImpl implements ServiceCurso {
 
 	private final Log LOG = LogFactory.getLog(getClass());
@@ -20,38 +27,44 @@ public class ServiceCursoImpl implements ServiceCurso {
 
 	@Override()
 	public List<Curso> listar(String filtro) {
-		LOG.trace("listar cursos");
-		return daoCurso.getALL(filtro);
+		this.LOG.trace("listar cursos");
+		return this.daoCurso.getALL(filtro);
 	}
 
 	@Override()
 	public List<Curso> listarUltimos() {
-		LOG.trace("listar ultimos 10 cursos");
-		return daoCurso.getTenLast();
+		this.LOG.trace("listar ultimos 10 cursos");
+		return this.daoCurso.getTenLast();
 	}
 
 	@Override()
 	public Curso buscarPorID(long id) {
-		LOG.trace("Buscar un curso por su ID: " + id);
-		return daoCurso.getById(id);
+		this.LOG.trace("Buscar un curso por su ID: " + id);
+		return this.daoCurso.getById(id);
 	}
 
 	@Override()
 	public boolean crear(Curso c) {
-		LOG.trace("Crear un nuevo curso: " + c);
-		return daoCurso.insert(c);
+		this.LOG.trace("Crear un nuevo curso: " + c);
+		return this.daoCurso.insert(c);
+	}
+
+	@Override()
+	public boolean migrar(ArrayList<Curso> c) {
+		this.LOG.trace("Migra a la BBD los nuevos cursos: " + c);
+		return this.daoCurso.migrate(c);
 	}
 
 	@Override()
 	public boolean modificar(Curso c) {
-		LOG.trace("Modificar un curso: " + c);
-		return daoCurso.update(c);
+		this.LOG.trace("Modificar un curso: " + c);
+		return this.daoCurso.update(c);
 	}
 
 	@Override()
 	public boolean eliminar(long id) {
-		LOG.trace("Eliminar un curso por su ID: " + id);
-		return daoCurso.delete(id);
+		this.LOG.trace("Eliminar un curso por su ID: " + id);
+		return this.daoCurso.delete(id);
 	}
 
 }

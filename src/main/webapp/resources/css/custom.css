@@ -1,3 +1,84 @@
+/* Reset
+***************************************************/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+/*
+******************************************************/
+html{
+	height: 100%;
+}
+
+body {
+	font-family: Montserrat, sans-serif;
+	width: 100%;
+	height: 100%;
+}
+
+h1 {
+	font-family: 'Indie Flower', cursive;
+	color: #34495E;
+	font-size: 55px;
+	text-align: center;
+	font-weight: bold;
+	margin: 65px 25px 50px 25px;
+}
+
+.container{
+	/*width: 80%;*/
+	height: auto;
+	min-height:600px;
+	margin: 0 auto;
+	padding: 0;
+	padding-bottom:45px;	
+	background-color: #EEEEEE;
+}
+
+
 /* Login
 **************************************/
 
@@ -90,6 +171,183 @@
 /* Formularios Altas, Bajas y Modificaciones
 **************************************************************/
 
-.form-error{
+.container-form{
+	display: block;
+	width: 80%;
+	background-color: #34495E;
+	color: #FFF;
+	margin: 0 auto;
+	padding: 20px;
+	border-radius: 20px;
+}
+
+.container-form form, .container-form div.boton-delete{
+	width: 80%;
+	margin: 20px auto;
+}
+
+.container-form label{
+	font-family: 'Comfortaa', cursive;
+	margin: 20px 0 15px 0;
+	font-size: 20px;
+}
+
+.container-form input{
+	margin-bottom: 20px;
+}
+
+/* Tablas User
+**************************************************************/
+.listado-tabla {
+	background: #34495E;
+	color: #fff;
+	border-radius: 10px;
+	overflow: hidden;
+	margin: 0 auto;
+}
+
+.listado-tabla th, .listado-tabla td {
+	margin: .5em 1em;
+	text-align: left;
+}
+
+.listado-tabla tr {
+	border-color: #46637f;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+}
+
+.listado-tabla th {
+	display: none;
+}
+
+.listado-tabla td {
+	display: block;
+}
+
+.listado-tabla td:first-child {
+	padding-top: .5em;
+}
+
+.listado-tabla td:last-child {
+	padding-bottom: .5em;
+}
+
+.listado-tabla td:before {
+	content: attr(data-th) ": ";
+	font-weight: bold;
+	width: 6.5em;
+	display: inline-block;
+}
+
+@media (min-width: 480px) {
+	.listado-tabla td:before {
+		display: none;
+	}
+}
+
+.listado-tabla th, .listado-tabla td {
+  
+}
+
+.listado-tabla th, .listado-tabla td:before {
+	color: #dd5;
+}
+
+@media (min-width: 480px) {
+	.listado-tabla th, .listado-tabla td {
+		display: table-cell;
+		padding: .25em .5em;
+	}
+	.listado-tabla th:first-child, .listado-tabla td:first-child {
+		padding-left: 0;
+	}
+	.listado-tabla th:last-child, .listado-tabla td:last-child {
+		padding-right: 0;
+	}
+}
+
+@media (min-width: 480px) {
+	.listado-tabla th, .listado-tabla td {
+		padding: 1em !important;
+	}
+}
+
+/* Tablas Admin
+**************************************************************************/
+.container-table{
+	display: block;
+	width: 90%;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+.boton-gestion-cursos{
+	margin-bottom: 40px;
+}
+
+.boton-gestion-cursos a {
+	margin-right: 20px;
+}
+
+.tabla-admin thead{
+	background-color: #34495E;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 18px;
+    vertical-align: middle;
+}
+
+.tabla-admin th:last-child {
+  width: 50px;
+}
+
+.tabla-admin .edit {
+  margin-right: 10px;
+}
+
+.tabla-admin .edit:hover {
+  color: #0a79df;
+}
+
+.tabla-admin .delete:hover {
+  color: #dc2a2a;
+}
+
+/* Upload File
+***************************************************/
+
+.btn-subir {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+}
+
+.btn-subir input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+/* Mensaje para usuarios
+*********************************************************/
+
+.error-red{
 	color: red;
+}
+
+.form-error{
+	display: block;
+	margin-bottom: 20px;
+}
+
+.mensaje{
+	width: 80%;
+	margin: 20px auto;
 }

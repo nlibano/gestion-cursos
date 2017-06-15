@@ -7,6 +7,12 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.ipartek.formacion.domain.Curso;
 
+/**
+ * Mapper del Pojo Curso
+ * 
+ * @author Nagore Libano
+ *
+ */
 public class CursoMapper implements RowMapper<Curso> {
 
 	@Override()

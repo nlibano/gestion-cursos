@@ -28,6 +28,7 @@
 						&nbsp;Buscador
 					</label>
 					<input id="buscar_curso" name="buscar_curso" type="text" class="form-control" placeholder="Buscar curso">
+					
 				</div>
 			</form>
 

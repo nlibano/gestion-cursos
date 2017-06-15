@@ -4,7 +4,7 @@
 		Ultimos Cursos Creados
 	</h1>
 
-	<table>
+	<table class="listado-tabla">
 		<thead>
 			<tr>
 				<th>#</th>
@@ -26,7 +26,6 @@
 
 <%@ include file="includes/scripts.jsp"%>
 
-<script src="resources/js/buscar-curso.js"></script>
 
 <%@ include file="includes/footer.jsp"%>
 

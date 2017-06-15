@@ -1,11 +1,26 @@
 package com.ipartek.formacion.domain;
 
+import javax.validation.constraints.Size;
+
+/**
+ * Pojo Curso
+ * 
+ * @author Nagore Libano
+ *
+ */
 public class Curso {
+
+	private static final int NOMBRE_SIZE_MIN = 3;
+	private static final int NOMBRE_SIZE_MAX = 255;
+	private static final int CODIGO_SIZE_MIN = 1;
+	private static final int CODIGO_SIZE_MAX = 50;
 
 	private long id;
 
+	@Size(min = NOMBRE_SIZE_MIN, max = NOMBRE_SIZE_MAX, message = "El nombre debe tener al menos 3 letras")
 	private String nombre;
 
+	@Size(min = CODIGO_SIZE_MIN, max = CODIGO_SIZE_MAX, message = "El código no puede ser nulo")
 	private String codigo;
 
 	/**
@@ -19,7 +34,7 @@ public class Curso {
 	}
 
 	/**
-	 * Getter del atributo id
+	 * Obtiene el valor de la propiedad id
 	 * 
 	 * @return id
 	 */
@@ -28,7 +43,7 @@ public class Curso {
 	}
 
 	/**
-	 * Setter del atributo id
+	 * Define el valor de la propiedad id
 	 * 
 	 * @param id
 	 *            id del Curso
@@ -38,7 +53,7 @@ public class Curso {
 	}
 
 	/**
-	 * Getter del atributo nombre
+	 * Obtiene el valor de la propiedad nombre
 	 * 
 	 * @return nombre
 	 */
@@ -47,7 +62,7 @@ public class Curso {
 	}
 
 	/**
-	 * Setter del atributo nombre
+	 * Define el valor de la propiedad nombre
 	 * 
 	 * @param nombre
 	 *            nombre del Curso
@@ -57,7 +72,7 @@ public class Curso {
 	}
 
 	/**
-	 * Getter del atributo codigo
+	 * Obtiene el valor de la propiedad codigo
 	 * 
 	 * @return codigo
 	 */
@@ -66,7 +81,7 @@ public class Curso {
 	}
 
 	/**
-	 * Setter del atributo codigo
+	 * Define el valor de la propiedad codigo
 	 * 
 	 * @param codigo
 	 *            codigo del Curso
@@ -75,7 +90,7 @@ public class Curso {
 		this.codigo = codigo;
 	}
 
-	@Override
+	@Override()
 	public String toString() {
 		return "Curso [id=" + this.id + ", nombre=" + this.nombre + ", codigo=" + this.codigo + "]";
 	}

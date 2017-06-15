@@ -6,6 +6,7 @@
 	
 	<!-- Custom -->
 	<link href="resources/css/custom.css" rel="stylesheet">
+	<link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
 	
 </head>
 <body class="login_bg">
@@ -16,7 +17,10 @@
 			
 			<h1 class="box-header">Login</h1>
 			
-			<p>El Usuario o la contraseña es incorrecto</p>
+			<div class="alert alert-danger alert-dismissible mensaje" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				El Usuario o la contrase&ntilde;a es incorrecto
+			</div>
 			 
 			<label for="usuario">Usuario</label>
 			<input type="text" id="usuario" name="usuario">
@@ -29,5 +33,8 @@
 
 		</form>
 	</div>
+
+ 	<script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+ 		
 </body>
 </html>
